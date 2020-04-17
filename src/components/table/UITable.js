@@ -4,8 +4,38 @@ import { connect }  from 'react-redux';
 import TableItems from './TableItems';
 import VendorItems from './VendorItems';
 
+import { Table } from 'antd';
+import 'antd/dist/antd.css';
+
 import { getInvoices, getVendors, } from '../../actions/tableActions';
 
+const columns = [
+    {
+      title: 'Vendor',
+      dataIndex: 'vendorName',
+    },
+    {
+      title: 'Quantity',
+      dataIndex: 'quantity',
+      width: '20%',
+    },
+    {
+      title: 'Amount Bal',
+      dataIndex: 'amountBal',
+    },
+    {
+      title: 'Amount Due',
+      dataIndex: 'amountDue',
+    },
+    {
+      title: 'Credit Bal',
+      dataIndex: 'creditBal',
+    },
+    // {
+    //   title: 'Pay',
+    //   dataIndex: 'pay',
+    // },
+  ];
 
 
 
@@ -33,6 +63,11 @@ const UITable = ({
 
     return (
         <>
+        <Table
+        columns={columns}
+        dataSource={vendors}
+        dataSource={invoices}
+        />
         <h4>Invoices</h4>
         <li>
             {invoices.length === 0 ? (<p >No Invoices to display...</p>) : (
