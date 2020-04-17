@@ -1,11 +1,15 @@
 import {
     GET_INVOICES,
     INVOICE_ERROR,
-    SET_LOADING
+    GET_VENDORS,
+    VENDOR_ERROR,
+    SET_LOADING,
+    
 }  from '../actions/types';
 
 const initialState = {
     invoices: null,
+    vendors: null,
     loading: false,
     error: null,
 }
@@ -19,6 +23,18 @@ switch(action.type) {
             loading: false
         }
     case INVOICE_ERROR: 
+    console.error(action.payload)
+        return {
+            ...state,
+            error: action.payload
+        };
+    case GET_VENDORS:
+    return {
+        ...state,
+        vendors: action.payload,
+        loading: false
+    }
+    case VENDOR_ERROR: 
     console.error(action.payload)
         return {
             ...state,

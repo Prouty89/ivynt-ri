@@ -2,10 +2,14 @@ import {
     GET_INVOICES,
     INVOICE_ERROR,
     SET_LOADING,
-    // GET_VENDORS,
+    GET_VENDORS,
+    VENDOR_ERROR,
     // APPLY_CREDIT,
     // POST_PAYMENT, 
 } from './types';
+
+import store from '../store';
+
 
 
 //Retrieve Invoices
@@ -28,30 +32,36 @@ export const getInvoices = () => async dispatch => {
 
 };
 
+// Retrieve Vendors
+export const getVendors = () => async dispatch => {
+    try {
+        setLoading();
+        const res = await fetch('/vendors');
+        const data = await res.json();
+        dispatch({
+            type: GET_VENDORS,
+            payload: data
+        })
+    } catch (err) {
+        dispatch({
+            type: VENDOR_ERROR,
+            payload: err.response
+        });
+    }
+};
+
+// Combine Call 2,3
+export const combineCalls = () => [
+    getInvoices(),
+    getVendors()
+  ];
+
+
 export const setLoading = () => {
     return {
         type: SET_LOADING
     }
 }
-
-
-
-//Retrieve Vendors
-// export const getVendors = () => async dispatch => {
-//     try {
-//         const res = await fetch('/vendors');
-//         const data = await res.json();
-//         dispatch({
-//             type: GET_VENDORS,
-//             payload: data
-//         })
-//     } catch (err) {
-//         dispatch({
-//             type: VENDOR_ERROR,
-//             payload: err.response
-//         });
-//     }
-// };
 
 
 // // Apply Credit

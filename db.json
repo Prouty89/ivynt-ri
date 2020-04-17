@@ -59,7 +59,8 @@
 		},
 		{
 			"vendorId": "T1",
-			"vednorName" : "Target"
+			"vednorName" : "Target",
+			"creditBal" : 0.0	
 		},
 		{
 			"vendorId": "W1",
