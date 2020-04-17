@@ -1,6 +1,7 @@
 import {
     GET_INVOICES,
-    INVOICE_ERROR
+    INVOICE_ERROR,
+    SET_LOADING,
     // GET_VENDORS,
     // APPLY_CREDIT,
     // POST_PAYMENT, 
@@ -10,6 +11,7 @@ import {
 //Retrieve Invoices
 export const getInvoices = () => async dispatch => {
     try {
+        setLoading();
         const res = await fetch('/invoices');
         const data = await res.json();
         dispatch({
@@ -23,7 +25,15 @@ export const getInvoices = () => async dispatch => {
             payload: err.response
         });
     }
+
 };
+
+export const setLoading = () => {
+    return {
+        type: SET_LOADING
+    }
+}
+
 
 
 //Retrieve Vendors
@@ -37,7 +47,7 @@ export const getInvoices = () => async dispatch => {
 //         })
 //     } catch (err) {
 //         dispatch({
-//             type: LOGS_ERROR,
+//             type: VENDOR_ERROR,
 //             payload: err.response
 //         });
 //     }
@@ -62,7 +72,7 @@ export const getInvoices = () => async dispatch => {
 //         })
 //     } catch (err) {
 //         dispatch({
-//             type: LOGS_ERROR,
+//             type: CREDIT_ERROR,
 //             payload: err.response
 //         });
 //     }
@@ -86,7 +96,7 @@ export const getInvoices = () => async dispatch => {
 //         })
 //     } catch (err) {
 //         dispatch({
-//             type: LOGS_ERROR,
+//             type: PAYMENT_ERROR,
 //             payload: err.response
 //         });
 //     }
