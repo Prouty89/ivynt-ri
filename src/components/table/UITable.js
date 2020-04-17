@@ -24,7 +24,7 @@ const UITable = ({ invoice: { invoices, loading }, getInvoices }) => {
             <li >
                 <h4>Invoices</h4>
             </li>
-            {invoices.length === 0 ? (<p className="center">No Invoices to display...</p>) : (
+            {invoices.length === 0 ? (<p >No Invoices to display...</p>) : (
                 invoices.map(invoice => <TableItems invoice={invoice} key={invoice.id} />)
             )}
         </ul>
@@ -34,7 +34,7 @@ const UITable = ({ invoice: { invoices, loading }, getInvoices }) => {
 
 
 const mapStateToProps = state => ({
-    invoices: state.invoices
+    invoice: state.table
 })
 
 export default connect(mapStateToProps, { getInvoices })(UITable);
