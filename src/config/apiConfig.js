@@ -7,15 +7,11 @@ import axios from "axios";
 let one = '/invoices';
 let two = '/vendors';
 
-// For common config
-axios.defaults.headers.post["Content-Type"] = "application/json";
 
-export const axiosCallOne = () => {
-    const apiUrl = one;
-    return axios.create({
-        baseURL: apiUrl
-    })
-}
+export const axiosCallOne = axios.create({
+    baseURL: one
+})
+
 
 export const axiosCallTwo = () => {
     const apiUrl = two;

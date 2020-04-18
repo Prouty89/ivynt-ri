@@ -1,60 +1,48 @@
 import {
     GET_INVOICES,
-    INVOICE_ERROR,
+    INVOICES_SUCCESS,
+    INVOICES_FAIL,
     GET_VENDORS,
-    VENDOR_ERROR,
-    SET_LOADING,
-    SET_DATA
-    
+    VENDORS_SUCCESS,
+    VENDORS_FAIL,
+    POST_CREDIT,
+    CREDIT_SUCCESS,
+    CREDIT_FAIL,
+    POST_PAYMENT,
+    PAYMENT_SUCCESS,
+    PAYMENT_FAIL
 }  from '../actions/types';
 
 const initialState = {
-    invoices: null,
-    vendors: null,
+    invoices: [],
+    vendors: [],
     loading: false,
     error: null,
-    data: null,
 }
 
-export default(state = initialState, action) => {
+const tableReducer = (state = initialState, action) => {
+
 switch(action.type) {
     case GET_INVOICES:
         return {
             ...state,
-            invoices: action.payload,
-            loading: false
-        };
-    case SET_DATA:
-        return{
-            ...state,
-            datas: action.payload
-        };
-    case INVOICE_ERROR: 
-    console.error(action.payload)
-        return {
-            ...state,
-            error: action.payload
-        };
-    case GET_VENDORS:
-    return {
-        ...state,
-        vendors: action.payload,
-        loading: false
-    };
-
-    case VENDOR_ERROR: 
-    console.error(action.payload)
-        return {
-            ...state,
-            error: action.payload
-        };
-
-    case SET_LOADING:
-        return{
-            ...state,
             loading: true
+        }
+    case INVOICES_SUCCESS:
+        return {
+            ...state,
+            invoices: action.payload,
+            loading: false,
+        }
+    case INVOICES_FAIL: 
+    console.error(action.payload)
+        return {
+            ...state,
+            error: action.payload
         };
     default: 
     return state;
     }
 };
+
+export default tableReducer;

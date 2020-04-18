@@ -4,11 +4,7 @@ import { Table } from 'antd';
 import 'antd/dist/antd.css';
 
 
-const UITable = ({}) => {
-
-    const title = null;
-    const dataIndex = null;
-    const dataSource = null;
+const UITable = ({title, dataSource, dataIndex}) => {
 
     const columns=
         [

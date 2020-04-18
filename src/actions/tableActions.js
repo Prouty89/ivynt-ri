@@ -1,37 +1,105 @@
-import {
-    SET_DATA
-} from './types';
+import{
+    GET_INVOICES,
+    INVOICES_SUCCESS,
+    INVOICES_FAIL,
+    GET_VENDORS,
+    VENDORS_SUCCESS,
+    VENDORS_FAIL,
+    POST_CREDIT,
+    CREDIT_SUCCESS,
+    CREDIT_FAIL,
+    POST_PAYMENT,
+    PAYMENT_SUCCESS,
+    PAYMENT_FAIL
+} from './types'
 
 import axios from 'axios';
-import  { axiosCallOne, axiosCallTwo } from '../config/apiConfig';
 
 
 
 
-
-export const collectData = () => dispatch => {
-    axiosCallOne()
-    .get()
-    .then(res => {
-        dispatch({type: SET_DATA, payload: res.data})
-        console.log(res.data)
-    })
-    axiosCallTwo()
-    .get()
-    .then(res => {
-        dispatch({type: SET_DATA, payload: res.data})
-        console.log(res.data)
-    })
-}
-
-
-
-
-
-
+export const getInvoices = () => async dispatch => {
+    try {
+        dispatch({
+            type: GET_INVOICES
+        })
+        const res = await fetch('/invoices');
+        const data = await res.json();
+        dispatch({
+            type: INVOICES_SUCCESS,
+            payload: data
+        })
+        data.map((val)=> console.log(val));
+    } catch (err) {
+        dispatch({
+            type: INVOICES_FAIL,
+            payload: err.response
+        });
+    }
+};
 
 
 
+// export const getInvoices = () => {
+//    return dispatch => {
+//     dispatch({type: GET_INVOICES});
+//     console.log('status')
+//     axios()
+//     .get('/invoices')
+//     .then(res => {
+//         dispatch({type: INVOICES_SUCCESS, payload: res})
+//         console.log(res.data)
+//     })
+//     .catch(error => 
+//         dispatch({type: INVOICES_FAIL, payload: error}))
+//         console.log("error")
+//     };
+// };
+
+
+
+// import {
+//     SET_DATA,
+//     DATA_ERROR,
+//     GET_INVOICES,
+//     GET_VENDORS
+// } from './types';
+
+// import axios from 'axios';
+
+// import  { axiosCallOne, axiosCallTwo } from '../config/apiConfig';
+
+
+// export const collectData = () => async dispatch => {
+
+//     try {
+//         const res = await fetch('/invoices')
+//         const data = await res.json();
+//         dispatch({
+//             type: SET_DATA, payload: data
+//         })
+//         console.log("payload", data)
+//     } catch(err) {
+//         dispatch({
+//             type:DATA_ERROR,
+//             payload: err.response
+//         })
+//         console.log("errorrr")
+//     }
+// }
+
+    // axiosCallOne()
+    // .get()
+    // .then(res => {
+    //     const data = res.data[0]
+    //     dispatch({type: SET_DATA, payload: data})
+    //     console.log(data.invoiceId)
+    // })
+    // axiosCallTwo()
+    // .get()
+    // .then(res => {
+    //     dispatch({type: SET_DATA, payload: res.data})
+    // })
 
 
 

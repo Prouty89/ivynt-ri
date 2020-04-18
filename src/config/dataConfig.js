@@ -2,7 +2,9 @@ import React, {useEffect} from 'react';
 
 import { connect }  from 'react-redux';
 
-import { collectData } from '../actions/tableActions';
+import { getInvoices } from '../actions/tableActions';
+
+import TableItems from '../components/table/TableItems';
 
 const title = null;
 const dataIndex = null;
@@ -35,27 +37,33 @@ export const exampleColumns = [
       dataIndex: 'pay',
     },
   ];
+
   
-  const Test = ({data: {datas}, collectData }) => {
+  const Test = ({ invoice: { invoices }, getInvoices }) => {
+  
 
     useEffect(() => {
-      collectData();
-    },[])
+      getInvoices();
+    }, [])
     
-  
 
+    {console.log('invoices', invoices)}
     return(
       <>
-      <h1>
-      {console.log("datas", datas)}
-      </h1>
+       <ul>
+    {
+      invoices.map(
+        invoice=><li invoice={invoice} key={invoice.invoiceid}>{invoice.invoiceId}</li>
+      )
+    }
+        </ul>
       </>
     )
   };
 
   const mapStateToProps = state => ({
-    data: state.table 
+    invoice: state.invoice
 })
 
   
-export default connect(mapStateToProps, {collectData})(Test);
+export default connect(mapStateToProps, {getInvoices})(Test);
