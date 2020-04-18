@@ -10,14 +10,15 @@ let two = '/vendors';
 const requestOne = axios.get(one);
 const requestTwo = axios.get(two);
 
+
 export function collectData(){
     return function(dispatch) {
         return axios.all([requestOne, requestTwo])
         .then(axios.spread((...res) => {
-            const resOne = res[0]
-            const resTwo = res[1]
-            dispatch(setData(resOne, resTwo))
-            console.log(resOne, resTwo)
+            const resOne = res[0];
+            const resTwo = res[1];
+            dispatch(setData({resOne, resTwo}))
+            console.log(resTwo, resOne)
         }))
         .catch((err) =>
         console.log("There's been an error", err)
@@ -32,6 +33,7 @@ export function setData(data) {
         payload: data
     }
 };
+
 
 //Retrieve Invoices
 // export const getInvoices = () => async dispatch => {

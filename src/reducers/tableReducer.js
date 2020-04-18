@@ -27,7 +27,7 @@ switch(action.type) {
     case SET_DATA:
         return{
             ...state,
-            data: action.payload
+            datas: action.payload
         };
     case INVOICE_ERROR: 
     console.error(action.payload)
@@ -48,7 +48,7 @@ switch(action.type) {
             ...state,
             error: action.payload
         };
-        
+
     case SET_LOADING:
         return{
             ...state,

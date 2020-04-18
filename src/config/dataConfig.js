@@ -36,7 +36,7 @@ export const exampleColumns = [
     },
   ];
   
-  const Test = ({data: {datas,}, collectData }) => {
+  const Test = ({data: {datas}, collectData }) => {
 
     useEffect(() => {
       collectData();
@@ -47,7 +47,7 @@ export const exampleColumns = [
     return(
       <>
       <h1>
-      {console.log("data", datas)}
+      {console.log("datas", datas)}
       </h1>
       </>
     )
