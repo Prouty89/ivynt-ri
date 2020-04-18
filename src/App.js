@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import UITable from './components/table/UITable';
+import Test from './config/dataConfig';
 
 import './App.css';
 
@@ -14,8 +15,8 @@ function App() {
     <Provider store={store}>
     <div className="App">
       
-      Initial
-      <UITable />
+      {/* <UITable /> */}
+      <Test />
 
     </div>
     </Provider>

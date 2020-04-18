@@ -1,67 +1,84 @@
 import {
-    GET_INVOICES,
-    INVOICE_ERROR,
-    SET_LOADING,
-    GET_VENDORS,
-    VENDOR_ERROR,
-    // APPLY_CREDIT,
-    // POST_PAYMENT, 
+    SET_DATA
 } from './types';
 
-import store from '../store';
+import axios from 'axios';
 
+let one = '/invoices';
+let two = '/vendors';
 
+const requestOne = axios.get(one);
+const requestTwo = axios.get(two);
 
-//Retrieve Invoices
-export const getInvoices = () => async dispatch => {
-    try {
-        setLoading();
-        const res = await fetch('/invoices');
-        const data = await res.json();
-        dispatch({
-            type: GET_INVOICES,
-            payload: data
-        })
-    } 
-    catch (err) {
-        dispatch({
-            type: INVOICE_ERROR,
-            payload: err.response
-        });
-    }
-
-};
-
-// Retrieve Vendors
-export const getVendors = () => async dispatch => {
-    try {
-        setLoading();
-        const res = await fetch('/vendors');
-        const data = await res.json();
-        dispatch({
-            type: GET_VENDORS,
-            payload: data
-        })
-    } catch (err) {
-        dispatch({
-            type: VENDOR_ERROR,
-            payload: err.response
-        });
-    }
-};
-
-// Combine Call 2,3
-export const combineCalls = () => [
-    getInvoices(),
-    getVendors()
-  ];
-
-
-export const setLoading = () => {
-    return {
-        type: SET_LOADING
+export function collectData(){
+    return function(dispatch) {
+        return axios.all([requestOne, requestTwo])
+        .then(axios.spread((...res) => {
+            const resOne = res[0]
+            const resTwo = res[1]
+            dispatch(setData(resOne, resTwo))
+            console.log(resOne, resTwo)
+        }))
+        .catch((err) =>
+        console.log("There's been an error", err)
+        )
+        
     }
 }
+
+export function setData(data) {
+    return {
+        type: SET_DATA,
+        payload: data
+    }
+};
+
+//Retrieve Invoices
+// export const getInvoices = () => async dispatch => {
+//     try {
+//         setLoading();
+//         const res = await Promise.all(urls.map(url =>
+//             fetch(url)
+//             )) 
+//         const data = await res.json();
+//         dispatch({
+//             type: GET_INVOICES,
+//             payload: console.log("data",data)
+//         })
+//     } 
+//     catch (err) {
+//         dispatch({
+//             type: INVOICE_ERROR,
+//             payload: err.response
+//         });
+//     }
+
+// };
+
+// // Retrieve Vendors
+// export const getVendors = () => async dispatch => {
+//     try {
+//         setLoading();
+//         const res = await fetch('/vendors');
+//         const data = await res.json();
+//         dispatch({
+//             type: GET_VENDORS,
+//             payload: data
+//         })
+//     } catch (err) {
+//         dispatch({
+//             type: VENDOR_ERROR,
+//             payload: err.response
+//         });
+//     }
+// };
+
+
+// export const setLoading = () => {
+//     return {
+//         type: SET_LOADING
+//     }
+// }
 
 
 // // Apply Credit

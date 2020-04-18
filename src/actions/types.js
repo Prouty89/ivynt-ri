@@ -6,6 +6,7 @@ export const VENDOR_ERROR = 'VENDOR_ERROR';
 export const APPLY_CREDIT = 'APPLY_CREDIT';
 export const POST_PAYMENT = 'POST_PAYMENT';
 export const SET_LOADING = 'SET_LOADING';
+export const SET_DATA = 'SET_DATA';
 
 
 
