@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 
 import { connect }  from 'react-redux';
 
-import { getInvoices } from '../actions/tableActions';
+import { getInvoices, collectData } from '../actions/tableActions';
 
 import TableItems from '../components/table/TableItems';
 
@@ -39,21 +39,36 @@ export const exampleColumns = [
   ];
 
   
-  const Test = ({ invoice: { invoices }, getInvoices }) => {
+  const Test = ({ 
+    invoice: { invoices }, getInvoices, 
+    data: { datas }, collectData
+    }) => {
   
 
     useEffect(() => {
       getInvoices();
     }, [])
+
+    useEffect(() => {
+      collectData();
+    }, [])
     
 
-    {console.log('invoices', invoices)}
+    {console.log('datas', datas)}
     return(
       <>
        <ul>
     {
       invoices.map(
-        invoice=><li invoice={invoice} key={invoice.invoiceid}>{invoice.invoiceId}</li>
+      invoice=><li invoice={invoice} key={invoice.invoiceid}>
+        {invoice.invoiceId}-
+        {invoice.vendorId}-
+        {invoice.quantity}-
+        {invoice.product}-
+        {invoice.amountBal}-
+        {invoice.amountDue}-
+        {invoice.invoiceDate}-
+        </li>
       )
     }
         </ul>
@@ -61,9 +76,19 @@ export const exampleColumns = [
     )
   };
 
+  
+// invoiceId
+// vendorId
+// quantity
+// Product
+// amountBal
+// amountDue
+// invoiceDate
+
   const mapStateToProps = state => ({
-    invoice: state.invoice
+    invoice: state.invoice,
+    data: state.data,
 })
 
   
-export default connect(mapStateToProps, {getInvoices})(Test);
+export default connect(mapStateToProps, {getInvoices, collectData})(Test);

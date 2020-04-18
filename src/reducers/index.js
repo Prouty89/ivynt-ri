@@ -2,5 +2,6 @@ import { combineReducers } from 'redux';
 import  tableReducer  from './tableReducer';
 
 export default combineReducers({
-    invoice: tableReducer
+    invoice: tableReducer,
+    data: tableReducer
 });

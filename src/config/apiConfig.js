@@ -8,9 +8,12 @@ let one = '/invoices';
 let two = '/vendors';
 
 
-export const axiosCallOne = axios.create({
-    baseURL: one
-})
+export const axiosCallOne = () => {
+    const apiUrl = one;
+    return axios.create({
+        baseURL: apiUrl
+    })
+}
 
 
 export const axiosCallTwo = () => {

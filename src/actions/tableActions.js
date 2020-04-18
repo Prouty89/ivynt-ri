@@ -10,11 +10,14 @@ import{
     CREDIT_FAIL,
     POST_PAYMENT,
     PAYMENT_SUCCESS,
-    PAYMENT_FAIL
+    PAYMENT_FAIL,
+    DATA_SUCCESS
 } from './types'
 
-import axios from 'axios';
-
+import { 
+    axiosCallOne, 
+    axiosCallTwo 
+} from "../config/apiConfig";
 
 
 
@@ -29,7 +32,7 @@ export const getInvoices = () => async dispatch => {
             type: INVOICES_SUCCESS,
             payload: data
         })
-        data.map((val)=> console.log(val));
+        // data.map((val)=> console.log(val));
     } catch (err) {
         dispatch({
             type: INVOICES_FAIL,
@@ -37,6 +40,23 @@ export const getInvoices = () => async dispatch => {
         });
     }
 };
+
+
+export const collectData = () => async dispatch => {
+axiosCallOne()
+    .get()
+    .then(res => {
+        dispatch({type: DATA_SUCCESS, payload: res.data})
+        console.log("CallOne",res.data)
+    })
+    axiosCallTwo()
+    .get()
+    .then(res => {
+        const data = res.data
+        dispatch({type: DATA_SUCCESS, payload: data})
+        console.log("CallTwo",data)
+    })
+}
 
 
 
