@@ -3,36 +3,89 @@ import {
 } from './types';
 
 import axios from 'axios';
-
-let one = '/invoices';
-let two = '/vendors';
-
-const requestOne = axios.get(one);
-const requestTwo = axios.get(two);
+import  { axiosCallOne, axiosCallTwo } from '../config/apiConfig';
 
 
-export function collectData(){
-    return function(dispatch) {
-        return axios.all([requestOne, requestTwo])
-        .then(axios.spread((...res) => {
-            const resOne = res[0];
-            const resTwo = res[1];
-            dispatch(setData({resOne, resTwo}))
-            console.log(resTwo, resOne)
-        }))
-        .catch((err) =>
-        console.log("There's been an error", err)
-        )
-        
-    }
+
+
+
+export const collectData = () => dispatch => {
+    axiosCallOne()
+    .get()
+    .then(res => {
+        dispatch({type: SET_DATA, payload: res.data})
+        console.log(res.data)
+    })
+    axiosCallTwo()
+    .get()
+    .then(res => {
+        dispatch({type: SET_DATA, payload: res.data})
+        console.log(res.data)
+    })
 }
 
-export function setData(data) {
-    return {
-        type: SET_DATA,
-        payload: data
-    }
-};
+
+
+
+
+
+
+
+
+
+
+
+
+// import RequestBase from '../config/apiConfig';
+
+// let one = '/invoices';
+// let two = '/vendors';
+
+
+
+// const requestOne = axios.get(one);
+// const requestTwo = axios.get(two);
+
+// axios.interceptors.response.use(response => response.data)
+
+// export function collectData(){
+//     return function(dispatch) {
+//         return { data } = axios.all([requestOne, requestTwo])
+//         .then(axios.spread((...res) => {
+//             const resOne = res[0];
+//             const resTwo = res[1];
+//             dispatch(setData({resOne, resTwo}))
+//             console.log(resTwo, resOne)
+//         }))
+//         .catch((err) =>
+//         console.log("There's been an error", err)
+//         )
+        
+//     }
+// }
+
+// let one = '/invoices';
+// let two = '/vendors';
+
+// const RequestBase = () => { 
+//     axios.all([
+//     axios.get(one),
+//     axios.get(two)
+//     ])
+//   };
+
+// export const collectData = () => dispatch => {
+  
+//     .then(axios.spread((resOne, resTwo)=> {
+//         console.log('Date created: ', resOne.data.created_at);
+//         console.log('Date created:' , resTwo.data.created_at);
+//         dispatch({type: SET_DATA, payload: resOne})
+//     }))
+//     .catch(err => {
+//         console.log("There's been an error", err)
+//     })
+// }
+
 
 
 //Retrieve Invoices
