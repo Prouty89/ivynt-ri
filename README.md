@@ -4,10 +4,11 @@
 
 In the project directory, you can run:
 
-### `yarn start`
+### `yarn dev`
 
-Runs the app in the development mode.<br />
+Runs the app in the development mode alongside a server, the proxy of this server is indentified in the package.json.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:5000](http://localhost:5000) to inspect the database.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
@@ -66,23 +67,23 @@ o Dummy Credit Form
 
 Use case:
 
-  Fetch Application Config from an end point (Call 1)  Fetch all invoices from an end point. (Call 2)  Fetch vendors from another end point (Call3) 
-  Merge Data (PostProcessor) – A function to normalize / filter and do any data massage.  Display it on the table. Columns to Display will come from Configuration from Call1
- Last column of the table will have a button (Payment Button).  Payment button will be enabled only if there if Amount Due is > 0
- When Payment Button is clicked, a modal is shown
- Modal workflow:
-o Modal will be a separate component – that will be loaded on button click
-o What component the modal will load will be based on the following condition
-If there is credit available with the vendor -> Ask user if he wants to apply
-available credit (whether Credit Adjustment can be used or not will be
-dependent on config. If we set credit adjustment enabled to false in
-config, user will not be able to use credit)
-Once Credit is applied, if there is still amount Due, then continue the flow
-(load next payment component), where user can make remaining
+() Fetch Application Config from an end point (Call 1)
+(x) Fetch all invoices from an end point. (Call 2)
+(x) Fetch vendors from another end point (Call3) 
+(x) Merge Data (PostProcessor) – A function to normalize / filter and do any data massage. 
+() Display it on the table. Columns to Display will come from Configuration from Call1
+() Last column of the table will have a button (Payment Button).
+() Payment button will be enabled only if there if Amount Due is > 0
+() When Payment Button is clicked, a modal is shown
+() Modal workflow:
+() Modal will be a separate component – that will be loaded on button click
+() What component the modal will load will be based on the following condition
+()If there is credit available with the vendor : Ask user if he wants to apply available credit (whether Credit Adjustment can be used or not will be dependent on config. If we set credit adjustment enabled to false in config, user will not be able to use credit).
+()Once Credit is applied, if there is still amount Due, then continue the flow (load next payment component), where user can make remaining
 payment due. In this the amount to be paid should be (original Amount
 Due – credit applied).
-Once This entire flow is complete, show the new amount Due in the table
-If the amount Due now becomes 0, then Disable button. 
+()Once This entire flow is complete, show the new amount Due in the table
+()If the amount Due now becomes 0, then Disable button. 
 
 ## Data Flow: 
 
