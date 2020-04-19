@@ -12,10 +12,12 @@ export const exampleColumns = [
     {
       title: 'Vendor',
       dataIndex: 'vendorName',
+      key: 'vendorId'
     },
     {
       title: 'Quantity',
       dataIndex: 'quantity',
+      key: 'vendorId'
     },
     {
       title: 'Amount Bal',
@@ -49,19 +51,25 @@ export const exampleColumns = [
 
     useEffect(() => {});
 
-    let b = datas;
-    let a = seconddatas;
-    let c = a.concat(b);
+    //Merging data here. This can be improved upon, handled in a function.
+
+    let firstArr = datas;
+    let secondArr = seconddatas;
+    const map = new Map();
+    firstArr.forEach(item => map.set(item.vendorId, item));
+    secondArr.forEach(item => map.set(item.vendorId, {...map.get(item.vendorId), ...item}));
+    const combineData = Array.from(map.values());
 
     {
-      console.log("combinedatas", c);
+      console.log("combinedatas", combineData);
     }
    
     return (
       <>
       <Table
         columns={exampleColumns}
-        dataSource={c}
+        dataSource={combineData}
+        rowKey={record => record.vendorId}
       />
      
         <ul>
