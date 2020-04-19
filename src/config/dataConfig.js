@@ -51,13 +51,13 @@ export const exampleColumns = [
 
     useEffect(() => {});
 
-    //Merging data here. This can be improved upon, handled in a function.
+    //Merging data here first pass. This can be improved upon/ handled with a function. Removes duplicate vendor Id's which is an issue for multiple invoices with the same vendorId. 
 
     let firstArr = datas;
     let secondArr = seconddatas;
     const map = new Map();
-    firstArr.forEach(item => map.set(item.vendorId, item));
-    secondArr.forEach(item => map.set(item.vendorId, {...map.get(item.vendorId), ...item}));
+    secondArr.forEach(item => map.set(item.vendorId, item));
+    firstArr.forEach(item => map.set(item.vendorId, {...map.get(item.vendorId), ...item}));
     const combineData = Array.from(map.values());
 
     {
@@ -71,25 +71,6 @@ export const exampleColumns = [
         dataSource={combineData}
         rowKey={record => record.vendorId}
       />
-     
-        <ul>
-        </ul>
-        <ul>
-          {datas.map((data) => (
-            <li data={data} key={data.dataid}>
-              {data.vendorId}-{data.amountBal}-{data.amountDue}-{data.invoiceId}-{data.quantity}-{data.invoiceId}-{data.invoiceDate}
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {seconddatas.map((seconddata) => (
-            <li seconddata={seconddata} key={seconddata.seconddataid}>
-              {seconddata.vendorId}-{seconddata.vendorName}-{seconddata.creditBal}
-            </li>
-          ))}
-        </ul>
-        <ul>
-        </ul>
       </>
     );
   };

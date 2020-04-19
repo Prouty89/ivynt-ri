@@ -45,6 +45,15 @@
 			"amountBal"	: 0,
 			"amountDue" : 0,
 			"invoiceDate" : "03/31/2020"	
+		},
+		{
+			"invoiceId": 1055,
+			"vendorId" : "T1",
+			"quantity" : 10,
+			"product" : "Dress",
+			"amountBal"	: 44.00,
+			"amountDue" : 15.00,
+			"invoiceDate" : "03/31/2020"	
 		}
 	],
 
