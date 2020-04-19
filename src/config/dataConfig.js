@@ -4,9 +4,8 @@ import { connect }  from 'react-redux';
 
 import { collectData} from '../actions/tableActions';
 
-import TableItems from '../components/table/TableItems';
-
 import { Table } from 'antd';
+
 
 export const exampleColumns = [
     {
@@ -39,17 +38,14 @@ export const exampleColumns = [
 
   
   const Test = ({
-
     data: { datas, seconddatas },
     collectData,
-
   }) => {
+
 
     useEffect(() => {
       collectData();
     }, []);
-
-    useEffect(() => {});
 
     //Merging data here first pass. This can be improved upon/ handled with a function. Removes duplicate vendor Id's which is an issue for multiple invoices with the same vendorId. 
 
@@ -59,17 +55,12 @@ export const exampleColumns = [
     secondArr.forEach(item => map.set(item.vendorId, item));
     firstArr.forEach(item => map.set(item.vendorId, {...map.get(item.vendorId), ...item}));
     const combineData = Array.from(map.values());
-
-    {
-      console.log("combinedatas", combineData);
-    }
    
     return (
       <>
       <Table
         columns={exampleColumns}
         dataSource={combineData}
-        rowKey={record => record.vendorId}
       />
       </>
     );
