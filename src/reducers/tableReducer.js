@@ -1,10 +1,4 @@
 import {
-    GET_INVOICES,
-    INVOICES_SUCCESS,
-    INVOICES_FAIL,
-    GET_VENDORS,
-    VENDORS_SUCCESS,
-    VENDORS_FAIL,
     GET_DATA,
     DATA_SUCCESS,
     DATA_SUCCESSTWO,
@@ -29,42 +23,6 @@ const initialState = {
 const tableReducer = (state = initialState, action) => {
 
 switch(action.type) {
-    //INVOICE
-    case GET_INVOICES:
-        return {
-            ...state,
-            loading: true
-        }
-    case INVOICES_SUCCESS:
-        return {
-            ...state,
-            invoices: action.payload,
-            loading: false,
-        }
-    case INVOICES_FAIL: 
-    console.error(action.payload)
-        return {
-            ...state,
-            error: action.payload
-        };
-    //VENDOR
-    case GET_VENDORS:
-        return {
-            ...state,
-            loading: true
-        }
-    case VENDORS_SUCCESS:
-        return {
-            ...state,
-            vendors: action.payload,
-            loading: false,
-        }
-    case VENDORS_FAIL: 
-    console.error(action.payload)
-        return {
-            ...state,
-            error: action.payload
-        };
     //Call 2 & 3
     case GET_DATA:
         return {

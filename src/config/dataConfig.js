@@ -2,23 +2,22 @@ import React, {useEffect} from 'react';
 
 import { connect }  from 'react-redux';
 
-import { getInvoices, collectData, getVendors } from '../actions/tableActions';
+import { collectData} from '../actions/tableActions';
 
 import TableItems from '../components/table/TableItems';
 
-const title = null;
-const dataIndex = null;
-const dataSource = null;
-
+import { Table } from 'antd';
 
 export const exampleColumns = [
     {
       title: 'Vendor',
       dataIndex: 'vendorName',
+      key: 'vendorId'
     },
     {
       title: 'Quantity',
       dataIndex: 'quantity',
+      key: 'vendorId'
     },
     {
       title: 'Amount Bal',
@@ -40,76 +39,46 @@ export const exampleColumns = [
 
   
   const Test = ({
-    // invoice: { invoices },
-    // getInvoices,
+
     data: { datas, seconddatas },
     collectData,
-    // vendor: { vendors },
-    // getVendors,
+
   }) => {
-    // useEffect(() => {
-    //   getInvoices();
-    // }, []);
 
     useEffect(() => {
       collectData();
     }, []);
 
-    // useEffect(() => {
-    //   getVendors();
-    // }, []);
-
     useEffect(() => {});
 
+    //Merging data here first pass. This can be improved upon/ handled with a function. Removes duplicate vendor Id's which is an issue for multiple invoices with the same vendorId. 
+
+    let firstArr = datas;
+    let secondArr = seconddatas;
+    const map = new Map();
+    secondArr.forEach(item => map.set(item.vendorId, item));
+    firstArr.forEach(item => map.set(item.vendorId, {...map.get(item.vendorId), ...item}));
+    const combineData = Array.from(map.values());
+
     {
-      console.log("secdatas", seconddatas);
+      console.log("combinedatas", combineData);
     }
    
     return (
       <>
-        <ul>
-          {/* {invoices.map((invoice) => (
-            <li invoice={invoice} key={invoice.invoiceid}>
-              {invoice.invoiceId}-{invoice.vendorId}-{invoice.quantity}-
-              {invoice.product}-{invoice.amountBal}-{invoice.amountDue}-
-              {invoice.invoiceDate}
-            </li>
-          ))} */}
-        </ul>
-        <ul>
-          {datas.map((data) => (
-            <li data={data} key={data.dataid}>
-              {data.vendorId}-{data.amountBal}-{data.amountDue}-{data.invoiceId}-{data.quantity}-{data.invoiceId}-{data.invoiceDate}
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {seconddatas.map((seconddata) => (
-            <li seconddata={seconddata} key={seconddata.seconddataid}>
-              {seconddata.vendorId}-{seconddata.vendorName}-{seconddata.creditBal}
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {/* {vendors.map((vendor) => (
-            <li vendor={vendor} key={vendor.vendorid}>
-              {vendor.vendorId}-{vendor.vendorName}-{vendor.creditBal}
-            </li>
-          ))} */}
-        </ul>
+      <Table
+        columns={exampleColumns}
+        dataSource={combineData}
+        rowKey={record => record.vendorId}
+      />
       </>
     );
   };
 
-  // vendorId
-  // vendorName
-  // creditBal
 
   const mapStateToProps = state => ({
-    // invoice: state.invoice,
     data: state.data,
     seconddata: state.data,
-    // vendor: state.vendor
 })
 
   
