@@ -2,14 +2,11 @@ import React, {useEffect} from 'react';
 
 import { connect }  from 'react-redux';
 
-import { getInvoices, collectData, getVendors } from '../actions/tableActions';
+import { collectData} from '../actions/tableActions';
 
 import TableItems from '../components/table/TableItems';
 
-const title = null;
-const dataIndex = null;
-const dataSource = null;
-
+import { Table } from 'antd';
 
 export const exampleColumns = [
     {
@@ -40,41 +37,34 @@ export const exampleColumns = [
 
   
   const Test = ({
-    // invoice: { invoices },
-    // getInvoices,
+
     data: { datas, seconddatas },
     collectData,
-    // vendor: { vendors },
-    // getVendors,
+
   }) => {
-    // useEffect(() => {
-    //   getInvoices();
-    // }, []);
 
     useEffect(() => {
       collectData();
     }, []);
 
-    // useEffect(() => {
-    //   getVendors();
-    // }, []);
-
     useEffect(() => {});
 
+    let b = datas;
+    let a = seconddatas;
+    let c = a.concat(b);
+
     {
-      console.log("secdatas", seconddatas);
+      console.log("combinedatas", c);
     }
    
     return (
       <>
+      <Table
+        columns={exampleColumns}
+        dataSource={c}
+      />
+     
         <ul>
-          {/* {invoices.map((invoice) => (
-            <li invoice={invoice} key={invoice.invoiceid}>
-              {invoice.invoiceId}-{invoice.vendorId}-{invoice.quantity}-
-              {invoice.product}-{invoice.amountBal}-{invoice.amountDue}-
-              {invoice.invoiceDate}
-            </li>
-          ))} */}
         </ul>
         <ul>
           {datas.map((data) => (
@@ -91,25 +81,15 @@ export const exampleColumns = [
           ))}
         </ul>
         <ul>
-          {/* {vendors.map((vendor) => (
-            <li vendor={vendor} key={vendor.vendorid}>
-              {vendor.vendorId}-{vendor.vendorName}-{vendor.creditBal}
-            </li>
-          ))} */}
         </ul>
       </>
     );
   };
 
-  // vendorId
-  // vendorName
-  // creditBal
 
   const mapStateToProps = state => ({
-    // invoice: state.invoice,
     data: state.data,
     seconddata: state.data,
-    // vendor: state.vendor
 })
 
   

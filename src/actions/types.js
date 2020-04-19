@@ -1,15 +1,6 @@
 
 
 //fetch Table Data
-//Call2 Invoices
-export const GET_INVOICES = 'GET_INVOICES';
-export const INVOICES_SUCCESS = 'INVOICES_SUCCESS';
-export const INVOICES_FAIL = 'INVOICES_FAIL';
-
-//Call3 Vendors
-export const GET_VENDORS = 'GET_VENDORS';
-export const VENDORS_SUCCESS = 'VENDORS_SUCCESS';
-export const VENDORS_FAIL = 'VENDORS_FAIL';
 
 //Call 2-3
 export const GET_DATA = 'GET_DATA';

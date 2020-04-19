@@ -4,6 +4,8 @@
 
 In the project directory, you can run:
 
+### `yarn install`
+
 ### `yarn dev`
 
 Runs the app in the development mode alongside a server, there is a proxy indentified in the package.json.<br />  
@@ -22,8 +24,10 @@ You will also see any lint errors in the console.
 You will build a React application from scratch to demonstrate your capabilities as a software
 engineer. You can use any resources or libraries to help you accomplish this. This assignment is
 an example of some of the challenges we solve at iVoyant.
-Required Technologies and Frameworks:  React
-Preferred (but optional) technologies:  Redux, Redux-Saga
+Required Technologies and Frameworks:  React  
+
+Preferred (but optional) technologies:  Redux, Redux-Saga  
+
 Preferred UI Framework:  Ant Design ( https://ant.design/ )
 
 
@@ -67,6 +71,7 @@ UI Components:
  Forms (2)
 
 o Dummy Payment Form  
+  
 o Dummy Credit Form
 
 ## Use case:
