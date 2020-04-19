@@ -14,6 +14,7 @@ export const VENDORS_FAIL = 'VENDORS_FAIL';
 //Call 2-3
 export const GET_DATA = 'GET_DATA';
 export const DATA_SUCCESS = 'DATA_SUCCESS';
+export const DATA_SUCCESSTWO = 'DATA_SUCCESSTWO';
 export const DATA_FAIL = 'DATA_FAIL';
 
 

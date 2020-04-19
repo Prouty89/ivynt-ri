@@ -5,11 +5,12 @@ import axios from "axios";
 
 //You can change the URI here, but it must exist on the db... Create a function that makes a call and based on `${url}` will load data
 
-let url = window.location.pathname
-let one = '/invoices';
-let two = '/vendors';
-let dynamic = `${url}`
+//(Call 2 & 3 ) Display it on the table. Columns to Display will come from Configuration from Call 1 : "View available information"
 
+
+//base URL for an individual call to /invoices
+
+let one = '/invoices';
 
 export const axiosCallOne = () => {
     const apiUrl = one;
@@ -18,6 +19,9 @@ export const axiosCallOne = () => {
     })
 }
 
+//base URL for an individual call to /vendors
+
+let two = '/vendors';
 
 export const axiosCallTwo = () => {
     const apiUrl = two;
@@ -25,6 +29,11 @@ export const axiosCallTwo = () => {
         baseURL: apiUrl
     })
 }
+
+//base URL for an individual call to a dynamic URL (WIP)
+
+let url = window.location.pathname;
+let dynamic = `${url}`;
 
 export const axiosDynamic = () => {
     const apiUrl = dynamic;

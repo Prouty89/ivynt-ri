@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 
 import { connect }  from 'react-redux';
 
-import { getInvoices, collectData } from '../actions/tableActions';
+import { getInvoices, collectData, getVendors } from '../actions/tableActions';
 
 import TableItems from '../components/table/TableItems';
 
@@ -39,53 +39,66 @@ export const exampleColumns = [
   ];
 
   
-  const Test = ({ 
-    invoice: { invoices }, getInvoices, 
-    data: { datas }, collectData
-    }) => {
-  
-
-    useEffect(() => {
-      getInvoices();
-    }, [])
+  const Test = ({
+    // invoice: { invoices },
+    // getInvoices,
+    data: { datas, seconddatas },
+    collectData,
+    // vendor: { vendors },
+    // getVendors,
+  }) => {
+    // useEffect(() => {
+    //   getInvoices();
+    // }, []);
 
     useEffect(() => {
       collectData();
-    }, [])
-    
+    }, []);
 
-    {console.log('datas', datas)}
-    {console.log('window', window.location)}
-    return(
-      <>
-       <ul>
+    // useEffect(() => {
+    //   getVendors();
+    // }, []);
+
+    useEffect(() => {});
+
     {
-      invoices.map(
-      invoice=><li invoice={invoice} key={invoice.invoiceid}>
-        {invoice.invoiceId}-
-        {invoice.vendorId}-
-        {invoice.quantity}-
-        {invoice.product}-
-        {invoice.amountBal}-
-        {invoice.amountDue}-
-        {invoice.invoiceDate}-
-        </li>
-      )
+      console.log("secdatas", seconddatas);
     }
+   
+    return (
+      <>
+        <ul>
+          {/* {invoices.map((invoice) => (
+            <li invoice={invoice} key={invoice.invoiceid}>
+              {invoice.invoiceId}-{invoice.vendorId}-{invoice.quantity}-
+              {invoice.product}-{invoice.amountBal}-{invoice.amountDue}-
+              {invoice.invoiceDate}
+            </li>
+          ))} */}
         </ul>
         <ul>
-    {
-      datas.map(
-      data =><li data={data} key={data.dataid}>
-        {data.vendorId}-
-        {data.vendorName}-
-        {data.creditBal}-
-        </li>
-      )
-    }
+          {datas.map((data) => (
+            <li data={data} key={data.dataid}>
+              {data.vendorId}-{data.amountBal}-{data.amountDue}-{data.invoiceId}-{data.quantity}-{data.invoiceId}-{data.invoiceDate}
+            </li>
+          ))}
+        </ul>
+        <ul>
+          {seconddatas.map((seconddata) => (
+            <li seconddata={seconddata} key={seconddata.seconddataid}>
+              {seconddata.vendorId}-{seconddata.vendorName}-{seconddata.creditBal}
+            </li>
+          ))}
+        </ul>
+        <ul>
+          {/* {vendors.map((vendor) => (
+            <li vendor={vendor} key={vendor.vendorid}>
+              {vendor.vendorId}-{vendor.vendorName}-{vendor.creditBal}
+            </li>
+          ))} */}
         </ul>
       </>
-    )
+    );
   };
 
   // vendorId
@@ -93,9 +106,11 @@ export const exampleColumns = [
   // creditBal
 
   const mapStateToProps = state => ({
-    invoice: state.invoice,
+    // invoice: state.invoice,
     data: state.data,
+    seconddata: state.data,
+    // vendor: state.vendor
 })
 
   
-export default connect(mapStateToProps, {getInvoices, collectData})(Test);
+export default connect(mapStateToProps, {collectData})(Test);
