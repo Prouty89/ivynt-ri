@@ -21,7 +21,7 @@ const initialState = {
     vendors: [],
     loading: false,
     error: null,
-    data: []
+    datas: []
 }
 
 const tableReducer = (state = initialState, action) => {
@@ -44,7 +44,6 @@ switch(action.type) {
             ...state,
             error: action.payload
         };
-
     case GET_DATA:
         return {
             ...state,

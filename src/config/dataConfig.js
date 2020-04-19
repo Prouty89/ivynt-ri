@@ -55,6 +55,7 @@ export const exampleColumns = [
     
 
     {console.log('datas', datas)}
+    {console.log('window', window.location)}
     return(
       <>
        <ul>
@@ -72,18 +73,24 @@ export const exampleColumns = [
       )
     }
         </ul>
+        <ul>
+    {
+      datas.map(
+      data =><li data={data} key={data.dataid}>
+        {data.vendorId}-
+        {data.vendorName}-
+        {data.creditBal}-
+        </li>
+      )
+    }
+        </ul>
       </>
     )
   };
 
-  
-// invoiceId
-// vendorId
-// quantity
-// Product
-// amountBal
-// amountDue
-// invoiceDate
+  // vendorId
+  // vendorName
+  // creditBal
 
   const mapStateToProps = state => ({
     invoice: state.invoice,

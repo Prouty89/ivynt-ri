@@ -59,7 +59,7 @@
 		},
 		{
 			"vendorId": "T1",
-			"vednorName" : "Target",
+			"vendorName" : "Target",
 			"creditBal" : 0.0	
 		},
 		{
@@ -69,6 +69,7 @@
 		},
 		{
 			"vendorId": "G1",
+			"vendorName" : "Gary",
 			"creditBal" : 0.0		
 		}
 	]

@@ -11,6 +11,7 @@ import{
     POST_PAYMENT,
     PAYMENT_SUCCESS,
     PAYMENT_FAIL,
+    GET_DATA,
     DATA_SUCCESS
 } from './types'
 
@@ -42,21 +43,23 @@ export const getInvoices = () => async dispatch => {
 };
 
 
-export const collectData = () => async dispatch => {
-axiosCallOne()
+export const collectData = () => async (dispatch) => {
+  dispatch({ type: GET_DATA });
+  await axiosCallOne()
     .get()
-    .then(res => {
-        dispatch({type: DATA_SUCCESS, payload: res.data})
-        console.log("CallOne",res.data)
-    })
-    axiosCallTwo()
+    .then((res) => {
+      dispatch({ type: DATA_SUCCESS, payload: res.data });
+      console.log("CallOne", res.data);
+    });
+  dispatch({ type: GET_DATA });
+  await axiosCallTwo()
     .get()
-    .then(res => {
-        const data = res.data
-        dispatch({type: DATA_SUCCESS, payload: data})
-        console.log("CallTwo",data)
-    })
-}
+    .then((res) => {
+      const data = res.data;
+      dispatch({ type: DATA_SUCCESS, payload: data });
+      console.log("CallTwo", data);
+    });
+};
 
 
 
