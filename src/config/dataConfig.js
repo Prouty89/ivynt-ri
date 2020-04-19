@@ -5,6 +5,38 @@ import { connect }  from 'react-redux';
 import { collectData} from '../actions/tableActions';
 
 import { Table } from 'antd';
+import 'antd/dist/antd.css';
+
+let title;
+let dataIndex;
+let dataSource;
+
+const columns = [
+  {
+    title: title != null ? title : "fieldOne",
+    dataIndex: dataIndex != null ? dataIndex : " ",
+  },
+  {
+    title: title != null ? title : "fieldTwo",
+    dataIndex: dataIndex != null ? dataIndex : " ",
+  },
+  {
+    title: title != null ? title : "fieldThree",
+    dataIndex: dataIndex != null ? dataIndex : " ",
+  },
+  {
+    title: title != null ? title : "fieldFour",
+    dataIndex: dataIndex != null ? dataIndex : " ",
+  },
+  {
+    title: title != null ? title : "fieldFive",
+    dataIndex: dataIndex != null ? dataIndex : " ",
+  },
+  {
+    title: title != null ? title : "fieldSix",
+    dataIndex: dataIndex != null ? dataIndex : " ",
+  },
+];
 
 
 export const exampleColumns = [
@@ -58,9 +90,9 @@ export const exampleColumns = [
    
     return (
       <>
-      <Table
-        columns={exampleColumns}
-        dataSource={combineData}
+      <Table 
+          columns={window.location.pathname === '/test' ? exampleColumns : columns}
+          dataSource= {window.location.pathname === '/test' ? combineData : dataSource}
       />
       </>
     );
