@@ -4,7 +4,7 @@ import { Table } from 'antd';
 import 'antd/dist/antd.css';
 
 
-const UITable = ({title, dataSource, dataIndex}) => {
+const DynamicTable = ({title, dataSource, dataIndex}) => {
 
     const columns=
         [
@@ -47,7 +47,7 @@ const UITable = ({title, dataSource, dataIndex}) => {
 };
 
 
-export default connect(null)(UITable);
+export default connect(null)(DynamicTable);
 
 
 

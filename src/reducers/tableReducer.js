@@ -7,6 +7,7 @@ import {
     VENDORS_FAIL,
     GET_DATA,
     DATA_SUCCESS,
+    DATA_SUCCESSTWO,
     DATA_FAIL,
     POST_CREDIT,
     CREDIT_SUCCESS,
@@ -21,12 +22,14 @@ const initialState = {
     vendors: [],
     loading: false,
     error: null,
-    datas: []
+    datas: [],
+    seconddatas: []
 }
 
 const tableReducer = (state = initialState, action) => {
 
 switch(action.type) {
+    //INVOICE
     case GET_INVOICES:
         return {
             ...state,
@@ -44,6 +47,25 @@ switch(action.type) {
             ...state,
             error: action.payload
         };
+    //VENDOR
+    case GET_VENDORS:
+        return {
+            ...state,
+            loading: true
+        }
+    case VENDORS_SUCCESS:
+        return {
+            ...state,
+            vendors: action.payload,
+            loading: false,
+        }
+    case VENDORS_FAIL: 
+    console.error(action.payload)
+        return {
+            ...state,
+            error: action.payload
+        };
+    //Call 2 & 3
     case GET_DATA:
         return {
             ...state,
@@ -53,6 +75,13 @@ switch(action.type) {
         return {
             ...state,
             datas: action.payload,
+            seconddatas: action.payload,
+            loading: false,
+        }
+    case DATA_SUCCESSTWO:
+        return {
+            ...state,
+            seconddatas: action.payload,
             loading: false,
         }
     case DATA_FAIL: 
