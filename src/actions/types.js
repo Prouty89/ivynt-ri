@@ -10,12 +10,12 @@ export const DATA_FAIL = 'DATA_FAIL';
 
 
 //call4 Credit
-export const POST_CREDIT = 'POST_CREDIT';
+export const APPLY_CREDIT = 'POST_CREDIT';
 export const CREDIT_SUCCESS = 'CREDIT_SUCCESS';
 export const CREDIT_FAIL = 'CREDIT_FAIL';
 
 //call5 Payment
-export const POST_PAYMENT = 'POST_PAYMENT';
+export const APPLY_PAYMENT = 'POST_PAYMENT';
 export const PAYMENT_SUCCESS = 'PAYMENT_SUCCESS';
 export const PAYMENT_FAIL = 'PAYMENT_FAIL';
 
