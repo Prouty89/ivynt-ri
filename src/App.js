@@ -3,7 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
 
-import DynamicTable from './components/table/DynamicTable';
+import { AppConfig } from './config/appConfig';
 import Test from './config/dataConfig';
 
 import './App.css';
@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       
       {/* <DynamicTable /> */}
-      <Test />
+      <AppConfig />
 
     </div>
     </Provider>
