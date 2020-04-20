@@ -1,14 +1,8 @@
 import{
-    GET_INVOICES,
-    INVOICES_SUCCESS,
-    INVOICES_FAIL,
-    GET_VENDORS,
-    VENDORS_SUCCESS,
-    VENDORS_FAIL,
-    POST_CREDIT,
+    APPLY_CREDIT,
     CREDIT_SUCCESS,
     CREDIT_FAIL,
-    POST_PAYMENT,
+    APPLY_PAYMENT,
     PAYMENT_SUCCESS,
     PAYMENT_FAIL,
     GET_DATA,
@@ -23,47 +17,9 @@ import {
 
 
 
-// export const getInvoices = () => async dispatch => {
-//     try {
-//         dispatch({
-//             type: GET_INVOICES
-//         })
-//         const res = await fetch('/invoices');
-//         const data = await res.json();
-//         dispatch({
-//             type: INVOICES_SUCCESS,
-//             payload: data
-//         })
-//     } catch (err) {
-//         dispatch({
-//             type: INVOICES_FAIL,
-//             payload: err.response
-//         });
-//     }
-// };
-
-// export const getVendors = () => async dispatch => {
-//     try {
-//         dispatch({
-//             type: GET_VENDORS
-//         })
-//         const res = await fetch('/vendors');
-//         const data = await res.json();
-//         dispatch({
-//             type: VENDORS_SUCCESS,
-//             payload: data
-//         })
-//     } catch (err) {
-//         dispatch({
-//             type: VENDORS_FAIL,
-//             payload: err.response
-//         });
-//     }
-// };
-
-//Promise.all for handling redux-promises
 
 
+//Promise.all, or merge data as soon as you have it. 
 export const collectData = () => async (dispatch) => {
   dispatch({ type: GET_DATA });
   axiosCallOne()
@@ -80,27 +36,51 @@ export const collectData = () => async (dispatch) => {
   });
 };
 
-// Promise.all(
-//     [...new Array(3)].map((ignore,i)=>i === 0 ? 0 : (i + "01"))
-//     .map(
-//       start=>axios.get(`${api_root_url}/v1/?start=${start}`)
-//     )  
-//   ).then(
-//     results=>results.forEach(
-//       result=>
-//         dispatch({type: FETCH_DATA_SUCESS, payload: result.data})
-//       )
-//   )
+export const addCredit = (credit) => async dispatch => {
+    dispatch({ type: APPLY_CREDIT });
+    try {
+        const res = await fetch('/credit/apply', {
+        method: 'POST',
+        body: JSON.stringify(credit),
+        headers: {
+            'Content-Type' : 'application-json'
+        }
+        });
+        const data = await res.json();
+        dispatch({
+            type: CREDIT_SUCCESS,
+            payload: data
+        })
+        console.log("CREDIT:", data)
+    } catch (err) {
+        dispatch({
+            type: CREDIT_FAIL,
+            payload: err.response
+        });
+    }
+};
 
-//   axiosCallOne()
-//     .get()
-//     .then((res) => {
-//       dispatch({ type: DATA_SUCCESS, payload: res.data });
-//       console.log("CallOne", res.data);
-//     });
-//     axiosCallTwo()
-//     .get()
-//     .then((res) => {
-//       dispatch({ type: DATA_SUCCESSTWO, payload: res.data });
-//       console.log("CallTwo", res.data);
-//     });
+export const addPayment = (payment) => async dispatch => {
+    dispatch({ type: APPLY_PAYMENT });
+    try {
+        const res = await fetch('/payment', {
+        method: 'POST',
+        body: JSON.stringify(payment),
+        headers: {
+            'Content-Type' : 'application-json'
+        }
+        });
+        const data = await res.json();
+        dispatch({
+            type: PAYMENT_SUCCESS,
+            payload: data
+        })
+        console.log("PAYMENT:", data)
+    } catch (err) {
+        dispatch({
+            type: PAYMENT_FAIL,
+            payload: err.response
+        });
+    }
+};
+
